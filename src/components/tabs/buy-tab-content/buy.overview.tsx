@@ -2,8 +2,9 @@ import { StyledCoinList, StyledCoinListItem, StyledVerticalStack } from '@dfx.sw
 import { useWalletContext } from '../../../contexts/wallet.context';
 import { useBlockchain } from '../../../hooks/blockchain.hook';
 import { useMetaMask } from '../../../hooks/metamask.hook';
-import { Asset, AssetType, useAssetContext } from '@dfx.swiss/react';
 import { AvailableChains, getTokenIndex, isTokenAvailable } from '../../../config';
+import { Asset, AssetType, useAssetContext } from '@dfx.swiss/react';
+import copy from 'copy-to-clipboard';
 
 interface BuyTabContentOverviewProps {
   onAssetClicked: (asset: Asset) => void;
@@ -33,6 +34,7 @@ export function BuyTabContentOverview({ onAssetClicked }: BuyTabContentOverviewP
                   isToken={asset.type === AssetType.TOKEN}
                   protocol={toProtocol(blockchain)}
                   onClick={() => onAssetClicked(asset)}
+                  copy={() => (asset.chainId ? copy(asset.chainId) : undefined)}
                   popupLabel="Click on the MetaMask symbol in order to add this asset in your portfolio overview of your MetaMask or copy the address to add it manually."
                   onAdd={(svgData) => addContract(asset, svgData, selectedBlockchain)}
                 />
