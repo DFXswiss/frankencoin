@@ -1,7 +1,7 @@
 import { Asset, Blockchain } from '@dfx.swiss/react';
 
 export const AvailableTokens: { [c in Blockchain]?: string[] } = {
-  [Blockchain.ETHEREUM]: ['ZCHF', 'ETH', 'WBTC', 'USDT', 'FPS'],
+  [Blockchain.ETHEREUM]: ['ZCHF', 'ETH', 'WBTC', 'USDT', 'FPS', 'WFPS'],
   [Blockchain.POLYGON]: ['ZCHF', 'MATIC', 'WBTC', 'USDT', 'WFPS'],
   [Blockchain.OPTIMISM]: ['ZCHF', 'ETH', 'WBTC', 'USDT', 'WFPS'],
   [Blockchain.ARBITRUM]: ['ZCHF', 'ETH', 'WBTC', 'USDT', 'WFPS'],
