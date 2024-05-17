@@ -123,7 +123,7 @@ export function Main(): JSX.Element {
           </div>
           <div className="md:flex justify-between mt-6">
             <div className="basis-3/5 max-w-[50%] px-6 mx-auto md:mx-0">
-              <DfxTitleSection heading="Frankencoin Exchange" subheading="Buy • Sell • Convert" />
+              <DfxTitleSection heading="Frankencoin Exchange" subheading="Buy • Sell • Swap" />
             </div>
             {!isMobile && (
               <aside className="basis-2/5 shrink-0 md:min-w-[470px] lg:min-w-[512px] mx-auto md:mx-0">
@@ -133,7 +133,9 @@ export function Main(): JSX.Element {
             )}
           </div>
           {!isMobile ? (
-            <StyledTabContainer tabs={[useBuyTab(), useSellTab(), buildComingSoonTab('Convert')]} />
+            <div className="my-6">
+              <StyledTabContainer tabs={[useBuyTab(), useSellTab(), buildComingSoonTab('Swap')]} />
+            </div>
           ) : (
             <>
               <p className="text-center py-12">
