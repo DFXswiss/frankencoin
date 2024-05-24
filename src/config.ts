@@ -5,7 +5,6 @@ export const AvailableTokens: { [c in Blockchain]?: string[] } = {
   [Blockchain.POLYGON]: ['ZCHF', 'MATIC', 'WBTC', 'USDT', 'WFPS'],
   [Blockchain.OPTIMISM]: ['ZCHF', 'ETH', 'WBTC', 'USDT', 'WFPS'],
   [Blockchain.ARBITRUM]: ['ZCHF', 'ETH', 'WBTC', 'USDT', 'WFPS'],
-  [Blockchain.BINANCE_SMART_CHAIN]: ['ZCHF', 'BNB', 'BTCB', 'USDT', 'WFPS'],
   [Blockchain.BASE]: ['ZCHF', 'ETH', 'WFPS'],
 };
 export const AvailableChains = Object.keys(AvailableTokens) as Blockchain[];
