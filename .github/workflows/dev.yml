@@ -1,20 +1,20 @@
-name: PRD CI/CD
+name: DEV CI/CD
 
 on:
   push:
-    branches: [main]
+    branches: [develop]
   workflow_dispatch:
 
 env:
   NODE_VERSION: '16.x'
-  AZURE_ACCOUNT_NAME: 'stdfxfcxprd'
-  AZURE_CDN_PROFILE: 'cdnp-dfx-fcx-prd'
-  AZURE_CDN_ENDPOINT: 'cdne-dfx-fcx-prd'
-  AZURE_RESOURCE_GROUP: 'rg-dfx-fcx-prd'
+  AZURE_ACCOUNT_NAME: 'stdfxmexdev'
+  AZURE_CDN_PROFILE: 'cdnp-dfx-mex-dev'
+  AZURE_CDN_ENDPOINT: 'cdne-dfx-mex-dev'
+  AZURE_RESOURCE_GROUP: 'rg-dfx-mex-dev'
 
 jobs:
   build:
-    name: Build and deploy to PRD
+    name: Build and deploy to DEV
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,7 +23,7 @@ jobs:
       - name: Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.PRD_CREDENTIALS }}
+          creds: ${{ secrets.DEV_CREDENTIALS }}
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
@@ -38,12 +38,12 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: '{WC_PID}'
-          replace: ${{ secrets.PRD_WC_PID}}
+          replace: ${{ secrets.DEV_WC_PID}}
           regex: false
 
       - name: Build code
         run: |
-          npm run build
+          npm run build:dev
 
       - name: Run tests
         run: |
@@ -53,13 +53,13 @@ jobs:
         run: |
           npm run lint
 
-      - name: Deploy to Azure Storage (PRD)
+      - name: Deploy to Azure Storage (DEV)
         uses: azure/CLI@v1
         with:
           inlineScript: |
             az storage blob upload-batch --account-name ${{ env.AZURE_ACCOUNT_NAME }} -d '$web' -s ./build --overwrite
 
-      - name: Purge CDN endpoint (PRD)
+      - name: Purge CDN endpoint (DEV)
         uses: azure/CLI@v1
         with:
           inlineScript: |
