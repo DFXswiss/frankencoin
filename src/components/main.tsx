@@ -19,7 +19,7 @@ import {
 import { useAuthContext, useSessionContext, useUserContext } from '@dfx.swiss/react';
 
 export function Main(): JSX.Element {
-  const { authenticationToken } = useAuthContext();
+  const { isLoggedIn } = useAuthContext();
   const { isProcessing, needsSignUp, signUp, logout } = useSessionContext();
   const { register } = useUserContext();
   const [showsUserLink, setShowsUserLink] = useState(false);
@@ -95,7 +95,7 @@ export function Main(): JSX.Element {
             <a target="_blank" href={process.env.REACT_APP_DFX_URL} rel="noopener noreferrer">
               <DfxLogo />
             </a>
-            {authenticationToken && <StyledButton label="DISCONNECT" onClick={logout} />}
+            {isLoggedIn && <StyledButton label="DISCONNECT" onClick={logout} />}
           </div>
           <div className="md:flex justify-between mt-6">
             <div className="basis-3/5 max-w-[50%] px-6 mx-auto md:mx-0">
